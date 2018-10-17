@@ -75,7 +75,7 @@ public class HomeController {
     public String edit(@RequestParam("id") String id, HttpSession session, ModelMap model) throws Exception {
         if (fn.checkSession(session)) {
             try {
-                model.addAttribute("e", fn.getEmployee(Integer.valueOf(id)));
+                model.addAttribute("e", fn.getEmployee1(Integer.valueOf(id)));
                 return "edit";
             } catch (Exception e) {
                 model.addAttribute("list", fn.showAllEmployees());

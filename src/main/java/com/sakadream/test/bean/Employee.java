@@ -8,6 +8,9 @@ public class Employee {
     private String phone;
     private int salary;
     
+    public Employee() {
+       
+    }
     public Employee(int id, String fullName, String address, String email, String phone, int salary) {
         this.id = id;
         this.fullName = fullName;
@@ -40,6 +43,9 @@ public class Employee {
     }
     public int getSalary() {
         return this.salary;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
     public void setFullName(String fullName) {
         this.fullName = fullName;

@@ -61,6 +61,21 @@ public class Functions {
         throw new RuntimeException();
     }
 
+    public Employee getEmployee1(int id) throws Exception {
+        connect();
+        stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM EMPLOYEES WHERE ID = " + id);
+        Employee e = new Employee();
+        while(rs.next()) {
+            e.setId(rs.getInt("id"));
+            e.setFullName(rs.getString("fullName"));
+            e.setAddress(rs.getString("address"));
+            e.setEmail(rs.getString("email"));
+            e.setPhone(rs.getString("phone"));
+            e.setSalary(rs.getInt("Salary"));
+        }
+        return e;
+    }
     public void add(Employee e) throws Exception {
         connect();
         stmt = conn.createStatement();
