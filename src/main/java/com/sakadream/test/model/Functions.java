@@ -64,15 +64,15 @@ public class Functions {
     public Employee getEmployee1(int id) throws Exception {
         connect();
         stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM EMPLOYEES WHERE ID = " + id);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM public.\"EMPLOYEES\" WHERE \"ID\" = " + id);
         Employee e = new Employee();
         while(rs.next()) {
-            e.setId(rs.getInt("id"));
-            e.setFullName(rs.getString("fullName"));
-            e.setAddress(rs.getString("address"));
-            e.setEmail(rs.getString("email"));
-            e.setPhone(rs.getString("phone"));
-            e.setSalary(rs.getInt("Salary"));
+            e.setId(rs.getInt("ID"));
+            e.setFullName(rs.getString("FULLNAME"));
+            e.setAddress(rs.getString("ADDRESS"));
+            e.setEmail(rs.getString("EMAIL"));
+            e.setPhone(rs.getString("PHONE"));
+            e.setSalary(rs.getInt("SALARY"));
         }
         return e;
     }
