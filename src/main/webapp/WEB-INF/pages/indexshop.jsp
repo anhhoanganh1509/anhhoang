@@ -5,11 +5,10 @@
 <head>
 <title>Shop Hoàng Anh Sport</title>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
-<link href="${root}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../../resources/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<script src="../../resources/js/jquery.min.js"></script>
 
-<script src="${root}/js/jquery.min.js"></script>
-
-<link href="${root}/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../../resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -19,8 +18,8 @@
 
 <!-- <link href='http://fonts.googleapis.com/css?family=Exo:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'> -->
 
-<script type="text/javascript" src="${root}/js/move-top.js"></script>
-<script type="text/javascript" src="${root}/js/easing.js"></script>
+<script type="text/javascript" src="../../resources/js/move-top.js"></script>
+<script type="text/javascript" src="../../resources/js/easing.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event) {
@@ -31,8 +30,8 @@
 		});
 	});
 </script>
-<link rel="stylesheet" href="${root}/css/etalage.css">
-<script src="${root}/js/jquery.etalage.min.js"></script>
+<link rel="stylesheet" href="../../resources/css/etalage.css">
+<script src="../../resources/js/jquery.etalage.min.js"></script>
 		<script>
 			jQuery(document).ready(function($){
 
@@ -50,7 +49,7 @@
 			});
 		</script>
 
-<script src="${root}/js/responsiveslides.min.js"></script>
+<script src="../../resources/js/responsiveslides.min.js"></script>
 <script>
 	$(function() {
 		$("#slider1").responsiveSlides({

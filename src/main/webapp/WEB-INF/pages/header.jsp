@@ -24,7 +24,7 @@
 					<li><a href="#">KHUYẾN MÃI</a></li>
 					
 					</ul>
-				<script type="text/javascript" src="${root}/js/nav.js"></script>
+				<script type="text/javascript" src="../../resources/js/nav.js"></script>
 			</div>
 		</div>
 	</div>
