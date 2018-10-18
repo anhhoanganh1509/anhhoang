@@ -146,9 +146,7 @@ function getXa() {
 		<jsp:include page="slidershow.jsp"></jsp:include>
 	<!-- end slider show -->
 	
-	<!-- container -->
-		<jsp:include page="container.jsp"></jsp:include>
-	<!-- end container-->
+	
 	
 	<!-- footer -->
 		<jsp:include page="footer.jsp"></jsp:include>
