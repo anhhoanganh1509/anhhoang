@@ -69,7 +69,7 @@ public class Functions {
 		return list;     
 	}
 
-    public ArrayList<Product> getListProduct(String productId) throws Exception {
+    public ArrayList<Product> getListProduct(int productId) throws Exception {
 	    connect();
 	    StringBuilder query = new StringBuilder();
 	    query.append("select c.categoryname,p.productid,p.productma,p.productname,p.productimage,p.productprice,p.productdescription,p.sanid,p.ngaytao,p.nguoitao,p.ngaysua,p.nguoisua ");

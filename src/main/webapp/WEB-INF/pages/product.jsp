@@ -49,7 +49,7 @@
 			<%
 			Functions pDao = new Functions();
 				
-				for (Product p : pDao.getListProduct(request.getParameter("categoryId"))) {
+				for (Product p : pDao.getListProduct(1)) {
 					
 			%>
 			<div class="col-md-3 md-col">
