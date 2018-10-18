@@ -1,4 +1,5 @@
-
+<%@page import="com.sakadream.test.model.Functions"%>
+<%@page import="com.sakadream.test.bean.Category"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
@@ -12,11 +13,19 @@
 					<li class="active"><a href="${root}/jsp/index.jsp"><i> </i>Trang chủ</a></li>
 					<li><a href="#">Đồ bóng đá</a>
 						<ul class="drop">
-							<c:forEach items="${listCategory}" var="e">
+							<%
+						
+							Functions fn = new Functions();
+								
+								for (Category p : fn.getListCategory(0,null)) {
+									
+							%>
 							<li>
-								<a href="/product.htm?productId=${e.categoryId}">${e.categoryName}</a>								
+								<a href=""><%=p.getCategoryName() %></a>								
 							</li>
-						</c:forEach>
+							<%					
+								}
+							%>
 						</ul></li>
 					<li><a href="#"> ĐỒ BÓNG RỔ</a></li>
 					<li><a href="#">ĐỒ BƠI LỘI</a></li>

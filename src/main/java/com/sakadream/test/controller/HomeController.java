@@ -24,7 +24,6 @@ public class HomeController {
     public String login(@RequestParam("username") String username, @RequestParam("password") String password,
             HttpSession session, ModelMap model) throws Exception {
         if (fn.checkLogin(username, password, session)) {
-            model.addAttribute("listCategory", fn.getListCategory(0,null));
             return "indexshop";
         } else {
             model.addAttribute("error", 1);
