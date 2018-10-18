@@ -21,7 +21,7 @@
 									
 							%>
 							<li>
-								<a href=""><%=p.getCategoryName() %></a>								
+								<a href="/product.htm?categoryId=<%=p.getCategoryId() %>"><%=p.getCategoryName() %></a>								
 							</li>
 							<%					
 								}
