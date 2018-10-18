@@ -16,7 +16,8 @@ public class HomeController {
     Functions fn = new Functions();
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index() {
+    public String index(HttpSession session, ModelMap model) throws Exception {
+        model.addAttribute("listCategory", fn.getListCategory(0,null));
         return "index";
     }
 

@@ -1,53 +1,157 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login - Java Spring Example</title>
-    <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
+<title>Shop Hoàng Anh Sport</title>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
+<link href="${root}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+
+<script src="${root}/js/jquery.min.js"></script>
+
+<link href="${root}/css/style.css" rel="stylesheet" type="text/css" media="all" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script type="application/x-javascript">
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+</script>
+
+<!-- <link href='http://fonts.googleapis.com/css?family=Exo:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'> -->
+
+<script type="text/javascript" src="${root}/js/move-top.js"></script>
+<script type="text/javascript" src="${root}/js/easing.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event) {
+			event.preventDefault();
+			$('html,body').animate({
+				scrollTop : $(this.hash).offset().top
+			}, 1000);
+		});
+	});
+</script>
+<link rel="stylesheet" href="${root}/css/etalage.css">
+<script src="${root}/js/jquery.etalage.min.js"></script>
+		<script>
+			jQuery(document).ready(function($){
+
+				$('#etalage').etalage({
+					thumb_image_width: 300,
+					thumb_image_height: 400,
+					source_image_width: 900,
+					source_image_height: 1200,
+					show_hint: true,
+					click_callback: function(image_anchor, instance_id){
+						alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+					}
+				});
+
+			});
+		</script>
+
+<script src="${root}/js/responsiveslides.min.js"></script>
+<script>
+	$(function() {
+		$("#slider1").responsiveSlides({
+			auto : true,
+			speed : 500,
+			namespace : "callbacks",
+			pager : true,
+		});
+	});
+</script>
+
+<script>
+	$(document).ready(function(c) {
+		$('.alert-close').on('click', function(c) {
+			$('.message').fadeOut('slow', function(c) {
+				$('.message').remove();
+			});
+		});
+	});
+</script>
+<script>
+	$(document).ready(function(c) {
+		$('.alert-close1').on('click', function(c) {
+			$('.message1').fadeOut('slow', function(c) {
+				$('.message1').remove();
+			});
+		});
+	});
+</script>
+
+
+	
+<script>
+    function getHuyen() {
+    $.ajax({
+        async: false,
+        url: "CartServlet",
+        type: "POST",
+        dataType: "json",
+        data: {            
+            'isAction': "getHuyenTP",
+            'tinhTPId': $("#diaChiTinhId").val()           
+        },      
+        success: function(results) {        	
+            var htmlCombo = "<option value='0'>Ch&#7885;n Qu&#7853;n/Huy&#7879;n</option>";
+            var htmlCombo1 = "<option value='0'>Ch&#7885;n x&atilde;</option>";
+            $.each(results, function(key, value) {
+            	if(value.key!="value") {
+                	htmlCombo += "<option value='" + value.id + "'>"+ value.name + "</option>";
+            	}
+            });
+            $('#diaChiHuyenId').html(htmlCombo);
+            $('#diaChiXaId').html(htmlCombo1); 
+        },
+        error: function () {
+            console.log("Error");
+        }
+    });
+}    
+function getXa() {
+    $.ajax({
+        async: false,
+        url: "CartServlet",
+        type: "POST",
+        dataType: "json",
+        data: {            
+            'isAction': "getXaTP",
+            'huyenTPId': $("#diaChiHuyenId").val()           
+        },      
+        success: function(results) {        	
+            var htmlCombo = "<option value='0'>Ch&#7885;n x&atilde;</option>";
+            $.each(results, function(key, value) {
+            	if(value.key!="value") {
+                	htmlCombo += "<option value='" + value.id + "'>"+ value.name + "</option>";
+            	}
+            });
+            $('#diaChiXaId').html(htmlCombo);     
+        },
+        error: function () {
+            console.log("Error");
+        }
+    });
+}     
+</script>
 </head>
-
 <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="https://java-in-heroku.herokuapp.com/">Java Spring Example</a>
-            </div>
-        </div>
-    </nav>
+	<!--header-->
+		<jsp:include page="header.jsp"></jsp:include>
+	<!-- end header -->
 
-    <div class="container">
-        <div class="col-md-4 col-md-offset-4">
-            <form action="/login.htm" method="POST" role="form">
-                <legend>Login</legend>
-
-                <div class="form-group">
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Username">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                </div>
-                <button type="submit" class="btn btn-primary">Login</button>
-                <c:if test="${error == 1}">
-                    <div class="alert alert-danger" role="alert">Username or password invaild!</div>
-                </c:if>
-            </form>
-        </div>
-    </div>
-
-    <div class="container">
-        <footer>
-            <p>
-                &copy; <a href="http://sakadream.me">sakadream.me</a> 2017
-            </p>
-        </footer>
-    </div>
+	
+	<!-- slider show -->
+		<jsp:include page="slidershow.jsp"></jsp:include>
+	<!-- end slider show -->
+	
+	<!-- container -->
+		<jsp:include page="container.jsp"></jsp:include>
+	<!-- end container-->
+	
+	<!-- footer -->
+		<jsp:include page="footer.jsp"></jsp:include>
+	<!-- end footer -->
 </body>
-<script src="/resources/js/bootstrap.min.js"></script>
-<script src="/resources/js/jquery.min.js"></script>
-
 </html>

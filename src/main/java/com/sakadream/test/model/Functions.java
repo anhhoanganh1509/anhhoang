@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 
+import com.sakadream.test.bean.Category;
 import com.sakadream.test.bean.Employee;
 
 public class Functions {
@@ -25,6 +26,43 @@ public class Functions {
 
         conn = DriverManager.getConnection(dbUrl, username, password);
     }
+
+    public ArrayList<Category> getListCategory(int chaid, String name) throws Exception { 
+        connect();
+		StringBuilder query = new StringBuilder();
+		query.append("select * from public.category where");
+		if(chaid == 1) {
+			if(name == null) { 
+				query.append(" chaid is not null ");
+			}else {
+				query.append(" chaid is not null ");
+				query.append(" and categoryname like '%"+name+"%' ");
+			}
+		}else{
+			if(name == null) {
+				query.append(" chaid is null ");
+			}else {
+				query.append(" chaid is null ");
+				query.append(" and categoryname like '%"+name+"%' ");
+			}
+		}
+		query.append(" AND daxoa = 0 order by categoryid desc ");
+		String sql = query.toString();
+		stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		ArrayList<Category> list = new ArrayList<>();
+		while(rs.next()) {
+			Category c = new Category(); 
+			c.setCategoryId(rs.getLong("categoryid"));
+			c.setCategoryName(rs.getString("categoryname"));
+			c.setNgayTao(rs.getTimestamp("ngaytao"));
+			c.setNguoiTao(rs.getString("nguoitao"));
+			c.setNgaySua(rs.getTimestamp("ngaysua"));
+			c.setNguoiSua(rs.getString("nguoisua"));
+			list.add(c);
+		} 
+		return list;     
+	}
 
     public Boolean checkLogin(String username, String password, HttpSession session) throws Exception {
         connect();
@@ -64,7 +102,7 @@ public class Functions {
     public Employee getEmployee1(int id) throws Exception {
         connect();
         stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM public.\"EMPLOYEES\" WHERE \"ID\" = " + id);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM public.EMPLOYEES WHERE ID = " + id);
         Employee e = new Employee();
         while(rs.next()) {
             e.setId(rs.getInt("ID"));
