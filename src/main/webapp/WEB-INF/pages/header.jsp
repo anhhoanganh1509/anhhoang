@@ -14,7 +14,7 @@
 						<ul class="drop">
 							<c:forEach items="${listCategory}" var="e">
 							<li>
-								<a href="">${e.categoryName}</a>								
+								<a href="/product.htm?productId=${e.categoryId}">${e.categoryName}</a>								
 							</li>
 						</c:forEach>
 						</ul></li>

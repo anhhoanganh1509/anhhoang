@@ -1,16 +1,21 @@
 package com.sakadream.test.model;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.net.URI;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.sakadream.test.bean.Category;
 import com.sakadream.test.bean.Employee;
+import com.sakadream.test.bean.Product;
 
 public class Functions {
     Connection conn;
@@ -62,6 +67,63 @@ public class Functions {
 			list.add(c);
 		} 
 		return list;     
+	}
+
+    public ArrayList<Product> getListProduct(String id, String productId, String ma) throws Exception {
+	    connect();
+	    StringBuilder query = new StringBuilder();
+	    query.append("select c.categoryname,p.productid,p.productma,p.productname,p.productimage,p.productprice,p.productdescription,p.sanid,p.ngaytao,p.nguoitao,p.ngaysua,p.nguoisua ");
+	    query.append(" from public.category c join public.product p on c.categoryid = p.productma where ");
+	    if(id != null && productId == null && ma == null) {
+	    	//product.jsp
+	    	query.append(" c.chaid = "+id+" and p.sanid is not null ");
+	    }else if(id == null && productId != null && ma == null) {
+	    	// single.jsp
+	    	query.append(" p.productname = "+productId+" ");
+	    }
+	    else {
+	    	//detailproduct.jsp
+	    	query.append(" p.productma = "+ma+" and p.sanid is not null "); 
+	    }
+	    query.append(" and p.daxoa = 0 ORDER BY p.productid desc ");
+		String sql = query.toString();
+	    stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		ArrayList<Product> list = new ArrayList<>();
+	    try  {
+	        while (rs.next()) {
+	        	Product p = new Product(); 
+	            Blob blob = rs.getBlob("productimage");
+	            InputStream inputStream = blob.getBinaryStream();
+	            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+	            byte[] buffer = new byte[4096];
+	            int bytesRead = -1;
+	            while ((bytesRead = inputStream.read(buffer)) != -1) {
+	                outputStream.write(buffer, 0, bytesRead);                  
+	            }
+	            byte[] imageBytes = outputStream.toByteArray();
+	            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+	            inputStream.close();
+	            outputStream.close();
+	            p.setBase64Image(base64Image);
+	            p.setProductId(rs.getLong("productid"));
+	            p.setProductMa(rs.getLong("productma"));
+	            p.setProductName(rs.getString("productname"));
+	            p.setProductPrice(rs.getString("productprice"));
+	            p.setProductDescription(rs.getString("productdescription"));
+	            p.setSanId(rs.getLong("sanid"));
+	            p.setNgayTao(rs.getTimestamp("ngaytao"));
+				p.setNguoiTao(rs.getString("nguoitao"));
+				p.setNgaySua(rs.getTimestamp("ngaysua"));
+				p.setNguoiSua(rs.getString("nguoisua"));
+	            p.setCategoryName(rs.getString("categoryname"));
+	            list.add(p);
+	        }          
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	        throw ex;
+	    }      
+	    return list;
 	}
 
     public Boolean checkLogin(String username, String password, HttpSession session) throws Exception {

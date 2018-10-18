@@ -140,12 +140,15 @@ function getXa() {
 		<jsp:include page="header.jsp"></jsp:include>
 	<!-- end header -->
 
-	
+	<%if(request.getParameter("categoryId") == null && request.getParameter("productId") == null) {%>
 	<!-- slider show -->
 		<jsp:include page="slidershow.jsp"></jsp:include>
 	<!-- end slider show -->
+	<%} %>
 	
-	
+	<%if(request.getParameter("categoryId") != null && request.getParameter("productId") == null) {%>
+		<jsp:include page="product.jsp"></jsp:include>
+	<%} %> 
 	
 	<!-- footer -->
 		<jsp:include page="footer.jsp"></jsp:include>

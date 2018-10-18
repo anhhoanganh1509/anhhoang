@@ -31,6 +31,12 @@ public class HomeController {
             return "index";
         }
     }
+    
+    @RequestMapping(value = "/product", method = RequestMethod.GET)
+    public String product(@RequestParam("productId") String productId, HttpSession session, ModelMap model) throws Exception {
+        model.addAttribute("categoryId", productId);
+        return "indexshop";
+    }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpSession session) {
