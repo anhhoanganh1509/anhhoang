@@ -69,22 +69,14 @@ public class Functions {
 		return list;     
 	}
 
-    public ArrayList<Product> getListProduct(String id, String productId, String ma) throws Exception {
+    public ArrayList<Product> getListProduct(String productId) throws Exception {
 	    connect();
 	    StringBuilder query = new StringBuilder();
 	    query.append("select c.categoryname,p.productid,p.productma,p.productname,p.productimage,p.productprice,p.productdescription,p.sanid,p.ngaytao,p.nguoitao,p.ngaysua,p.nguoisua ");
 	    query.append(" from public.category c join public.product p on c.categoryid = p.productma where ");
-	    if(id != null && productId == null && ma == null) {
-	    	//product.jsp
-	    	query.append(" c.chaid = "+id+" and p.sanid is not null ");
-	    }else if(id == null && productId != null && ma == null) {
-	    	// single.jsp
-	    	query.append(" p.productname = "+productId+" ");
-	    }
-	    else {
-	    	//detailproduct.jsp
-	    	query.append(" p.productma = "+ma+" and p.sanid is not null "); 
-	    }
+	    
+	    	query.append(" c.chaid = "+productId+" and p.sanid is not null ");
+	    
 	    query.append(" and p.daxoa = 0 ORDER BY p.productid desc ");
 		String sql = query.toString();
 	    stmt = conn.createStatement();
