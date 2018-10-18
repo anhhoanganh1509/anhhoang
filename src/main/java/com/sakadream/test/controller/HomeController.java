@@ -34,6 +34,7 @@ public class HomeController {
     
     @RequestMapping(value = "/product", method = RequestMethod.GET)
     public String product(@RequestParam("productId") String productId, HttpSession session, ModelMap model) throws Exception {
+        model.addAttribute("listProduct", fn.getListProduct(productId,null,null));
         model.addAttribute("categoryId", productId);
         return "indexshop";
     }

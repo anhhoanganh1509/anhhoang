@@ -1,5 +1,4 @@
-<%@page import="com.sakadream.test.model.Functions"%>
-<%@page import="com.sakadream.test.bean.Product"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
@@ -46,15 +45,10 @@
 		<div class="products">
 		<h2 class=" products-in">Sản Phẩm</h2>
 		<div class="top-products">
-			<%
-			Functions pDao = new Functions();
-				
-				for (Product p : pDao.getListProduct(request.getParameter("categoryId"), null, null)) {
-					
-			%>
+			<c:forEach items="${listProduct}" var="e">
 			<div class="col-md-3 md-col">
 				<div class="col-md">
-					<a href="index.jsp?productId=<%=p.getProductId()%>" class="compare-in"> 
+					<a href="index.jsp?productId=${e.productId}" class="compare-in"> 
 						<img src="">
 						<div class="compare">
 							<span>Chi Tiết</span>
@@ -62,17 +56,9 @@
 					</a>
 					<div class="top-content">
 						<h5 style="text-align: center;">
-							<%
-								if (p.getSanId() == 1) {
-							%>
-							<a href="#"><%=p.getCategoryName()%> sân nhà</a>
-							<%
-								} else {
-							%>
-							<a href="#"><%=p.getCategoryName()%> sân khách</a>
-							<%
-								}
-							%>
+							
+							<a href="#">${e.categoryName} sân khách</a>
+							
 						</h5>
 						<div class="white">
 							<a href="CartServlet?command=plus&ID=<%=p.getProductId()%>"
@@ -85,14 +71,11 @@
 					</div>
 				</div>
 			</div>
-			
+			</c:forEach>
 			<div class="clearfix"></div>
 		</div>
 		<div class="top-products">
-			<%
-				
-				}
-			%>
+		
 			<div class="clearfix"></div>
 
 		</div>
