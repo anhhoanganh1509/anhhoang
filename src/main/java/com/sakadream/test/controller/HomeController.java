@@ -16,8 +16,7 @@ public class HomeController {
     Functions fn = new Functions();
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(HttpSession session, ModelMap model) throws Exception {
-        model.addAttribute("listCategory", fn.getListCategory(0,null));
+    public String index(){
         return "index";
     }
 
@@ -25,8 +24,8 @@ public class HomeController {
     public String login(@RequestParam("username") String username, @RequestParam("password") String password,
             HttpSession session, ModelMap model) throws Exception {
         if (fn.checkLogin(username, password, session)) {
-            model.addAttribute("list", fn.showAllEmployees());
-            return "employees";
+            model.addAttribute("listCategory", fn.getListCategory(0,null));
+            return "indexshop";
         } else {
             model.addAttribute("error", 1);
             return "index";
