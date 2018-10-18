@@ -77,7 +77,6 @@ public class Functions {
 	    
 	    	query.append(" c.chaid = "+productId+" and p.sanid is not null ");
 	    
-	    query.append(" and p.daxoa = 0 ORDER BY p.productid desc ");
 		String sql = query.toString();
 	    stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
