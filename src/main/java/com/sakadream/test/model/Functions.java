@@ -69,13 +69,13 @@ public class Functions {
 		return list;     
 	}
 
-    public ArrayList<Product> getListProduct(int productId) throws Exception {
+    public ArrayList<Product> getListProduct() throws Exception {
 	    connect();
 	    StringBuilder query = new StringBuilder();
 	    query.append("select c.categoryname,p.productid,p.productma,p.productname,p.productimage,p.productprice,p.productdescription,p.sanid,p.ngaytao,p.nguoitao,p.ngaysua,p.nguoisua ");
 	    query.append(" from public.category c join public.product p on c.categoryid = p.productma where ");
 	    
-	    	query.append(" c.chaid = "+productId+" and p.sanid is not null ");
+	    	query.append(" c.chaid = 1 and p.sanid is not null ");
 	    
 		String sql = query.toString();
 	    stmt = conn.createStatement();

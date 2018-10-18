@@ -49,7 +49,7 @@
 			<%
 			Functions pDao = new Functions();
 				
-				for (Product p : pDao.getListProduct(1)) {
+				for (Product p : pDao.getListProduct()) {
 					
 			%>
 			<div class="col-md-3 md-col">
