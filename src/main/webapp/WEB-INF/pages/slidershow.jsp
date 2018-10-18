@@ -8,10 +8,10 @@
 				<!-- Slideshow 4 -->
 				<div class="slider">
 					<ul class="rslides" id="slider1">
-						<li><img src="../../images/banner/banner-18.jpg" alt=""></li>
-						<li><img src="../../images/banner/banner-19.jpg" alt=""></li>
-						<li><img src="../../images/banner/banner-1546.png" alt=""></li>
-						<li><img src="../../images/banner/banner-ngoai-hang-anh-du-cup-c1-2018-19.png" alt=""></li>
+						<li><img src="../../resources/images/banner/banner-18.jpg" alt=""></li>
+						<li><img src="../../resources/images/banner/banner-19.jpg" alt=""></li>
+						<li><img src="../../resources/images/banner/banner-1546.png" alt=""></li>
+						<li><img src="../../resources/images/banner/banner-ngoai-hang-anh-du-cup-c1-2018-19.png" alt=""></li>
 					</ul>
 				</div>
 
