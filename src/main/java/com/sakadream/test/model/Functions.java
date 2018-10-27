@@ -34,7 +34,7 @@ public class Functions {
     	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hoanganh", "root", "Hoang123@");*/
     }
 
-    public ArrayList<Category> getListCategory(int chaid, String name) throws Exception { 
+    public Category getListCategory(int chaid, String name) throws Exception { 
         connect();
 		StringBuilder query = new StringBuilder();
 		query.append("select * from public.category where");
@@ -55,20 +55,22 @@ public class Functions {
 		}
 		query.append(" AND daxoa = 0 order by categoryid desc ");
 		String sql = query.toString();
+		Class.forName("org.postgresql.Driver");
+        URI dbUri = new URI(System.getenv("DATABASE_URL"));
+
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+
 		stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
-		ArrayList<Category> list = new ArrayList<>();
+		Category c = new Category(); 
 		while(rs.next()) {
-			Category c = new Category(); 
-			c.setCategoryId(rs.getLong("categoryid"));
-			c.setCategoryName(rs.getString("categoryname"));
-			c.setNgayTao(rs.getTimestamp("ngaytao"));
-			c.setNguoiTao(rs.getString("nguoitao"));
-			c.setNgaySua(rs.getTimestamp("ngaysua"));
-			c.setNguoiSua(rs.getString("nguoisua"));
-			list.add(c);
+			c.setCategoryName(username);
+			c.setNguoiTao(password);
+			c.setNguoiSua(dbUrl);
 		} 
-		return list;     
+		return c;     
 	}
 
     public ArrayList<Product> getListProduct() throws Exception {

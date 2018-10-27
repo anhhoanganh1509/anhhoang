@@ -46,11 +46,7 @@
 		<div class="products">
 		<h2 class=" products-in">Sản Phẩm</h2>
 		<div class="top-products">
-			<%
-			Functions fn = new Functions();
-								
-								for (Category p : fn.getListCategory(0,null)) {
-			%>
+			
 			<div class="col-md-3 md-col">
 				<div class="col-md">
 					<a href="" class="compare-in"> 
@@ -62,7 +58,7 @@
 					<div class="top-content">
 						<h5 style="text-align: center;">
 							
-							<a href="#"><%=p.getCategoryName()%> sân khách</a>
+							
 							
 						</h5>
 						<div class="white">
@@ -76,9 +72,7 @@
 					</div>
 				</div>
 			</div>
-			<%					
-				}
-			%>
+			
 			<div class="clearfix"></div>
 		</div>
 		<div class="top-products">

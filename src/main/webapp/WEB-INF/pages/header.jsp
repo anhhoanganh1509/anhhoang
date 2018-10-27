@@ -16,19 +16,17 @@
 							<%
 						
 							Functions fn = new Functions();
+							Category p = fn.getListCategory(0, null);
 								
-								for (Category p : fn.getListCategory(0,null)) {
 									
 							%>
 							<li>
-								<a href="/product.htm?categoryId=<%=p.getCategoryId() %>"><%=p.getCategoryName() %></a>								
+								<a href="/product.htm?categoryId="><%=p.getCategoryName() %></a>								
 							</li>
-							<%					
-								}
-							%>
+							
 						</ul></li>
-					<li><a href="#"> ĐỒ BÓNG RỔ</a></li>
-					<li><a href="#">ĐỒ BƠI LỘI</a></li>
+					<li><a href="#"> <%=p.getNguoiTao() %></a></li>
+					<li><a href="#"><%=p.getNguoiSua() %></a></li>
 					<li><a href="#">THÔNG TIN</a></li>
 					<li><a href="#">KHUYẾN MÃI</a></li>
 					
