@@ -22,14 +22,16 @@ public class Functions {
     Statement stmt;
 
     private void connect() throws Exception {
-        Class.forName("org.postgresql.Driver");
-        URI dbUri = new URI(System.getenv("DATABASE_URL"));
+    	 Class.forName("org.postgresql.Driver");
+         URI dbUri = new URI(System.getenv("DATABASE_URL"));
 
-        String username = dbUri.getUserInfo().split(":")[0];
-        String password = dbUri.getUserInfo().split(":")[1];
-        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+         String username = dbUri.getUserInfo().split(":")[0];
+         String password = dbUri.getUserInfo().split(":")[1];
+         String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
 
-        conn = DriverManager.getConnection(dbUrl, username, password);
+         conn = DriverManager.getConnection(dbUrl, username, password);
+    	/*Class.forName("com.mysql.jdbc.Driver");
+    	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hoanganh", "root", "Hoang123@");*/
     }
 
     public ArrayList<Category> getListCategory(int chaid, String name) throws Exception { 
@@ -120,8 +122,8 @@ public class Functions {
     public Boolean checkLogin(String username, String password, HttpSession session) throws Exception {
         connect();
         stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM public.\"USERS\"" 
-            + " WHERE \"USERNAME\" LIKE '" + username + "' AND \"PASSWORD\" LIKE '" + password + "'");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM users " 
+            + " WHERE \"useremail\" LIKE '" + username + "' AND \"userpass\" LIKE '" + password + "'");
         while(rs.next()) {
             session.setAttribute("username", username);
             return true;

@@ -22,7 +22,7 @@
 
     <div class="container">
         <div class="col-md-4 col-md-offset-4">
-            <form action="/login.htm" method="POST" role="form">
+            <form action="/login" method="POST" role="form">
                 <legend>Login</legend>
 
                 <div class="form-group">
